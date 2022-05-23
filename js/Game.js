@@ -5,7 +5,13 @@
 class Game {
     constructor() {
         this.missed = 0;
-        this.phrases = [];
+        this.phrases = [
+            {phrase: "the elephant in the room"},
+            {phrase: "keep your eyes peeled"},
+            {phrase: "put a pin in it"},
+            {phrase: "jump on the bandwagon"},
+            {phrase: "bend over backwards"}
+        ];
         this.activePhrase = null;
     }
 };
