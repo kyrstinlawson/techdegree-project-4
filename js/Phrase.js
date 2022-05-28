@@ -29,7 +29,12 @@ class Phrase {
      * Checks to see if the letter selected by the player matches a letter in the phrase.
      */
     checkLetter(letter) {
-        if (this.phrase.includes(letter)) {}
+        if (this.phrase.includes(letter)) {
+            this.showMatchedLetter(letter);
+            return true;
+        } else {
+            return false;
+        };
     };
     
     /**

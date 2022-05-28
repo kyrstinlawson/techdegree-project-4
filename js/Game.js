@@ -1,6 +1,7 @@
 /* Treehouse FSJS Techdegree
  * Project 4 - OOP Game App
  * Game.js */
+const startScreen = document.getElementById("overlay");
 
 class Game {
     constructor() {
@@ -28,11 +29,10 @@ class Game {
     * Begins game by selecting a random phrase and displaying it to user
     */
     startGame() {
-        const startScreen = document.getElementById("overlay");
-        overlay.style.display = "none";
+        startScreen.style.display = "none";
         let currentPhrase = new Phrase(this.getRandomPhrase());
         this.activePhrase = currentPhrase;   
-        currentPhrase.addPhraseToDisplay();     
+        currentPhrase.addPhraseToDisplay();    
     };
 
     /**
@@ -40,7 +40,7 @@ class Game {
      */
     checkForWin() {
         for (let i=0; i < ul.children.length; i++) {
-            if (ul.children[i].className === "hide") {
+            if (ul.children[i].className.includes("hide")) {
                 return false;
             } else {
                 return true;
@@ -54,8 +54,33 @@ class Game {
     * Checks if player has remaining lives and ends game if player is out
     */
    removeLife() {
-       
+       const hearts = document.querySelectorAll(".tries");
+       this.missed += 1;
+       let heartIndex = hearts.length - this.missed;
+       if (this.missed < 5) {
+           hearts[heartIndex].firstChild.src = "images/lostHeart.png"
+       } else {
+           this.gameOver(false);
+       };
    }
+
+   /**
+    * Displays game over message
+    * @param {boolean} gameWon - Whether or not the user won the game
+    */
+   gameOver(gameWon) {
+        let message = document.getElementById("game-over-message");
+        console.log(message);
+        if (gameWon) {
+           startScreen.style.display = "initial";
+           startScreen.className = "win";
+           message.innerHTML = "You win!"
+        } else {
+            startScreen.style.display = "initial";
+            startScreen.className = "lose";
+            message.innerHTML = `You lose! The phrase was <em>"${this.activePhrase.phrase}"</em>` 
+        }; 
+   };
 
     handleInteraction() {};
 };
