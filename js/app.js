@@ -4,8 +4,16 @@
 
 let game = "";
 const startButton = document.getElementById("btn__reset");
+const keyboard = document.getElementById("qwerty");
 
 startButton.addEventListener("click", () => {
     game = new Game();
     game.startGame();
 });
+
+qwerty.onclick = (e) => {
+    let target = e.target;
+    if (target.className === "key") {
+        game.handleInteraction(target);
+    };
+};

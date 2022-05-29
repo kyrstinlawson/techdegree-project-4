@@ -29,6 +29,13 @@ class Game {
     * Begins game by selecting a random phrase and displaying it to user
     */
     startGame() {
+        ul.innerHTML = "";
+        let keys = document.querySelectorAll(".key");
+        console.log(keys);
+        for (let i=0; i < keys.length; i++) {
+            keys[i].className = "key";
+            keys[i].disabled = false;
+        };
         startScreen.style.display = "none";
         let currentPhrase = new Phrase(this.getRandomPhrase());
         this.activePhrase = currentPhrase;   
@@ -39,13 +46,15 @@ class Game {
      * Checks for winning move by looking for any letters with the "hide" class
      */
     checkForWin() {
+        let remainingLetters = 0
         for (let i=0; i < ul.children.length; i++) {
             if (ul.children[i].className.includes("hide")) {
-                return false;
-            } else {
-                return true;
-            }
-        }
+                remainingLetters++;
+            };
+        };
+        if (remainingLetters === 0) {
+            return true;
+        };
     };
 
     /**
@@ -70,7 +79,6 @@ class Game {
     */
    gameOver(gameWon) {
         let message = document.getElementById("game-over-message");
-        console.log(message);
         if (gameWon) {
            startScreen.style.display = "initial";
            startScreen.className = "win";
@@ -82,5 +90,17 @@ class Game {
         }; 
    };
 
-    handleInteraction() {};
+    handleInteraction(button) {
+        button.disabled = true;
+        if (this.activePhrase.phrase.includes(button.innerHTML)) {
+            button.className += " chosen";
+            this.activePhrase.showMatchedLetter(button.innerHTML);
+            if (this.checkForWin()) {
+                this.gameOver(true);
+            };
+        } else {
+            button.className += " wrong";
+            this.removeLife();
+        };
+    };
 };
