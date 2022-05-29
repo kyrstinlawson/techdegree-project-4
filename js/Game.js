@@ -2,6 +2,7 @@
  * Project 4 - OOP Game App
  * Game.js */
 const startScreen = document.getElementById("overlay");
+const hearts = document.querySelectorAll(".tries");
 
 class Game {
     constructor() {
@@ -26,16 +27,19 @@ class Game {
     };
 
     /**
-    * Begins game by selecting a random phrase and displaying it to user
+    * Begins game by clearing previous game (if necessary) and selecting a random phrase and displaying it to user
     */
     startGame() {
+        
         ul.innerHTML = "";
-        let keys = document.querySelectorAll(".key");
-        console.log(keys);
         for (let i=0; i < keys.length; i++) {
             keys[i].className = "key";
             keys[i].disabled = false;
         };
+        for (let i=0; i < hearts.length; i++) {
+            hearts[i].firstChild.src = "images/liveHeart.png";
+        }
+        this.missed = 0;
         startScreen.style.display = "none";
         let currentPhrase = new Phrase(this.getRandomPhrase());
         this.activePhrase = currentPhrase;   
@@ -63,7 +67,6 @@ class Game {
     * Checks if player has remaining lives and ends game if player is out
     */
    removeLife() {
-       const hearts = document.querySelectorAll(".tries");
        this.missed += 1;
        let heartIndex = hearts.length - this.missed;
        if (this.missed < 5) {
