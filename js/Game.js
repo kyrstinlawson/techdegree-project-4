@@ -8,11 +8,11 @@ class Game {
     constructor() {
         this.missed = 0;
         this.phrases = [
-            {phrase: "the elephant in the room"},
-            {phrase: "keep your eyes peeled"},
-            {phrase: "put a pin in it"},
-            {phrase: "jump on the bandwagon"},
-            {phrase: "bend over backwards"}
+            new Phrase ("The Elephant in the Room"),
+            new Phrase ("Keep Your Eyes Peeled"),
+            new Phrase ("Put a Pin in it"),
+            new Phrase ("Jump on the Bandwagon"),
+            new Phrase ("Bend over Backwards")
         ];
         this.activePhrase = null;
     }
