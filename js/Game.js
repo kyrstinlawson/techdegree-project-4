@@ -41,9 +41,8 @@ class Game {
         }
         this.missed = 0;
         startScreen.style.display = "none";
-        let currentPhrase = new Phrase(this.getRandomPhrase());
-        this.activePhrase = currentPhrase;   
-        currentPhrase.addPhraseToDisplay();    
+        this.activePhrase = new Phrase(this.getRandomPhrase()); 
+        this.activePhrase.addPhraseToDisplay();    
     };
 
     /**
